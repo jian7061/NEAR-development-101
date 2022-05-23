@@ -1,0 +1,11 @@
+{
+  "name": "near-marketplace",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "repository": "git@github.com:jian7061/NEAR-development-101.git",
+  "author": "Jian Kim <jian7061@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "near-sdk-as": "^3.2.3"
+  }
+}
