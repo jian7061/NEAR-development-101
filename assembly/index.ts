@@ -1,15 +1,19 @@
-import { PersistentUnorderedMap } from "near-sdk-as";
-
-//map product ids of type string to product names of type string.
-export const products = new PersistentUnorderedMap<string, string>("PRODUCTS");
-//key for the persistent collenction should be short.
+import { Product, listedProducts } from "./model";
 
 //WRITE FUNCTION: function to add a new product to the products map.
-export function setProduct(id: string, productName: string): void {
-  products.set(id, productName);
+export function setProduct(product: Product): void {
+  let storedProduct = listedProducts.get(product.id);
+  if (storedProduct !== null) {
+    throw new Error(`s product with ${product.id} already exists`);
+  }
+  listedProducts.set(product.id, Product.fromPayload(product));
 }
 
 //READ FUNCTION: function to retrieve a product name from the products map.
-export function getProduct(id: string): string | null {
-  return products.get(id);
+export function getProduct(id: string): Product | null {
+  return listedProducts.get(id);
+}
+
+export function getProducts(): Product[] {
+  return listedProducts.values();
 }
